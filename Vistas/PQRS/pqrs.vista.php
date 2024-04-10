@@ -1,30 +1,38 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-
-    <!-- Contenido principal -->
+    <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1>PQRS - Peticiones, Quejas, Reclamos o Sugerencias</h1>
-                    <br>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        
+                    </ol>
                 </div>
             </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Información</h3>
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </div><!-- /.container-fluid -->
     </section>
 
-    <table class="table" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+    <!-- Main content -->
+    <section class="content">
+
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Información</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                   
+                </div>
+            </div>
+            <div class="card-body">
+            <table class="table" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
         <thead>
             <tr>
                 <th style="text-align: center; border: 1px solid #f7eeee; padding: 10px;">
@@ -60,5 +68,27 @@
                 </td>
             </tr>
         </tbody>
-    </table>
-</div>
+    </table>                
+
+
+            </div>
+            <!-- /.card-body -->
+
+            <!-- /.card-footer-->
+        </div>
+        <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+    <script>
+        document.getElementById('pqrsForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Evitar el envío del formulario por defecto
+            // Aquí puedes agregar la lógica para enviar los datos a un servidor o procesarlos
+
+            // Mostrar mensaje de éxito o redirigir al usuario
+            const pqrExito = document.getElementById('pqrs-exito');
+            pqrExito.style.display = 'block';
+        });
+    </script>
+
+</div> <!-- /.content-wrapper -->
