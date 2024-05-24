@@ -1,5 +1,5 @@
 <?php
-		require_once "./controladores/Facturas/Facturas.controller.php";
+require_once "./controladores/Facturas/Facturas.controller.php";
 ?>
 
 
@@ -55,51 +55,30 @@
                     <table id="datatables" class="table table-sm table-striped table-bordered table-hover datatable">          
                       <thead class="table-header">
                         <tr>
-                          <th width="15%">Número de Factura</th>
-                          <th width="10%">Fecha de emisión</th>
-                          <th width="5%">Descargar</th>
-                          <th width="5%">Consultar</th>
+                          <th width="20%">Número de Factura</th>
+                          <th width="30%">Fecha de emisión</th>
+                          <th width="30%">Detalle</th>
+                          <th width="50%">Descargar</th>
                         </tr>
                       </thead>
                       <tbody>
                       <?php
-                    
-                    /**Llamar al controlador para recuperar los registros de la tabla de base de datos */
-
+                        // Llamar al controlador para recuperar los registros de la tabla de base de datos
                         $Facturas = FacturasController::index();
-												        foreach($Facturas as $key => $Factura){
-													echo ' <tr>
-																	<td>'.$Factura["id_factura"].'</td>
-																	<td>'.$Factura["fecha_emision"].'</td>
-                            			<td>
-																		<a href="#" class="btn btn-warning btn-sm"><i class="fa fa-eye nav-icon"></i> <span>Consultar</a>
-																		<a href="#" class="btn btn-primary btn-sm"><i class="far fa-edit nav-icon"></i> <span></i> <span>Editar</a>
-																		<a href="#" class="btn btn-danger btn-sm" Id =""><i class="fa fa-trash nav-icon"></i> <span>Eliminar</span></a>
-																	</td>
-																</tr>';
-												
-                              }
-                              ?>
-
-                        <tr>
-                          <td>001</td>
-                          <td>2023-10-01</td>
-                          <td><a href="factura_001.pdf" target="_blank">Descargar</a></td>
-                          <td><button onclick="consultarFactura('factura_001.pdf')">Consultar</button></td>
-                        </tr>
-                        <tr>
-                          <td>002</td>
-                          <td>2023-10-05</td>
-                          <td><a href="factura_002.pdf" target="_blank">Descargar</a></td>
-                          <td><button onclick="consultarFactura('factura_002.pdf')">Consultar</button></td>
-                        </tr>
-                        <tr>
-                          <td>003</td>
-                          <td>2023-10-10</td>
-                          <td><a href="factura_003.pdf" target="_blank">Descargar</a></td>
-                          <td><button onclick="consultarFactura('factura_003.pdf')">Consultar</button></td>
-                        </tr>
-
+                        foreach($Facturas as $key => $Factura){
+                            echo '<tr>
+                                    <td>'.$Factura["id_factura"].'</td>
+                                    <td>'.$Factura["fecha_emision"].'</td>
+                                    <td>'.$Factura["detalle"].'</td>';
+                            
+                            echo '<td>
+                                    <a href="#" class="btn btn-warning btn-sm">
+                                        <i class="fa fa-eye nav-icon"></i> <span>Visualizar</span>
+                                    </a>
+                                </td>
+                            </tr>';
+                        }
+                      ?>
                       </tbody>
                     </table>
                     <div id="factura-consulta" style="display: none;">

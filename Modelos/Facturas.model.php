@@ -26,7 +26,7 @@ class FacturasModel {
     try {
       /** Realizar la consulta a la base de datos */
       $conexion = Connection::connect();
-      $stmt = $conexion->prepare("SELECT fac.id_factura, fac.fecha_emision 
+      $stmt = $conexion->prepare("SELECT fac.id_factura, fac.fecha_emision, fac. detalle 
                                   FROM factura AS fac
                                   ORDER BY fac.id_factura DESC");
 
