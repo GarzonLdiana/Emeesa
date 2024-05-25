@@ -73,7 +73,7 @@ require_once "./controladores/Facturas/Facturas.controller.php";
                             
                             echo '<td>
                                     <a href="#" class="btn btn-warning btn-sm">
-                                        <i class="fa fa-eye nav-icon"></i> <span>Visualizar</span>
+                                    <i class="fa fa-download nav-icon"></i> <span>Descargas</span>
                                     </a>
                                 </td>
                             </tr>';
