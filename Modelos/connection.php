@@ -10,7 +10,7 @@
 
 			$infoDB = array(
 				"host" => "localhost",
-				"database" => "emessa",
+				"database" => "emeesa",
 				"user" => "root",
 				"pass" => ""
 
