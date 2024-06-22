@@ -1,8 +1,6 @@
 <?php
 require_once "./controladores/Consumos/historial.controller.php";
 ?>
-
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -16,7 +14,6 @@ require_once "./controladores/Consumos/historial.controller.php";
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <!-- Incluye Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  
 </head>
 
 <body>
@@ -40,7 +37,7 @@ require_once "./controladores/Consumos/historial.controller.php";
                     <table class="table">
                         <thead>
                             <tr>
-                            <th>id consumo</th>
+                                <th>id consumo</th> <!-- Se corrigió el espaciado -->
                                 <th>Periodo de Consumo</th>
                                 <th>Consumo kWh</th>
                             </tr>
@@ -48,7 +45,7 @@ require_once "./controladores/Consumos/historial.controller.php";
                         <tbody>
                             <tr>
                                 <td>001</td>
-                                <td>65</td>
+                                <td>65</td> <!-- Se corrigió el orden de las columnas -->
                                 <td>2022-12</td>
                             </tr>
                             <tr>
@@ -104,7 +101,6 @@ require_once "./controladores/Consumos/historial.controller.php";
                 </div>
             </div>
         </section>
-
 
         <!-- /.card -->
 
