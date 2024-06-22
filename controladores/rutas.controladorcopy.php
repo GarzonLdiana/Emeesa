@@ -23,4 +23,4 @@ class RutasControlador
         include $rutaformulario;
     }
 }
-?>
+

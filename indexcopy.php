@@ -12,5 +12,5 @@ $rutas = new RutasControlador();
 /** Ejecutar la función IniciarPlantillaLogin */
 $rutas->IniciarPlantillalogin();
 
-?>
+
 

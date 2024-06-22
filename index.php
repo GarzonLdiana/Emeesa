@@ -18,6 +18,6 @@ $rutas = New RutasControlador();
 
 $rutas -> IniciarPlantilla();
 
-?>
+
 
 

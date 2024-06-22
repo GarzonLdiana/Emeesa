@@ -29,5 +29,5 @@ class RutasModelo
         return $pagina;
     }
 }
-?>
+
 
