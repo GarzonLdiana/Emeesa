@@ -1,23 +1,5 @@
 <?php
 
-/* =============================================================================================================
-* Desarrollado Por        : GAES 14
-* Fecha de Creación       : 18 Mayo 2024
-* Lenguaje Programación   : PHP
-* Producto o sistema      : IEMESSA
-* Tipo                    : Modelo
-* ====================================================================================================================
-* Versión Descripción
-* [1.0.0.0] Modelo de la tabla facturas.
-* ====================================================================================================================
-* MODIFICACIONES:
-* ====================================================================================================================
-* Ver.      Fecha            Autor – Empresa                       Descripción
-* --------- ------------- -----------------------------------   -------------------------------------------------------
-* 1.0       27/05/2024    GAES 14 -  Emessa                     Versión inicial del modelo de historial de consumo
-* ====================================================================================================================
-*/
-
 require_once "./modelos/connection.php";
 
 class historialModel {
@@ -56,27 +38,16 @@ class historialModel {
       $conexion = Connection::connect();
 
       // Validar que no exista un registro con el mismo código
-      $stmt = $conexion->prepare("SELECT * FROM historial WHERE CODIGO = :code");
+      $stmt = $conexion->prepare("SELECT * FROM historial WHERE codigo = :code");
       $stmt->bindParam(":code", $data["addInputCode"], PDO::PARAM_STR);
       $stmt->execute();
 
       if ($stmt->rowCount() > 0) {
         // Ya existe un registro con ese código
-        echo '<script>
-                Swal.fire({
-                  icon: "error",
-                  title: "La consumo ya fue registrado.",
-                  showConfirmButton: true,
-                  confirmButtonText: "Aceptar"
-                }).then(function(result){
-                  if (result.value) {
-                    window.location.href = "index.php?ruta=Consumos/VerHistorial/historial.crear";
-                  }
-                });
-              </script>';
+        return "El consumo ya fue registrado.";
       } else {
         // Crear el nuevo registro del consumo
-        $createStmt = $conexion->prepare("INSERT INTO Historial (codigo, Consumo kWh, activo, user_create)
+        $createStmt = $conexion->prepare("INSERT INTO historial (codigo, consumo_kwh, activo, user_create)
                                           VALUES (:addInputCode, :addInputDescription, :addInputActive, :userId)");
         $createStmt->bindParam(":addInputCode", $data["addInputCode"], PDO::PARAM_STR);
         $createStmt->bindParam(":addInputDescription", $data["addInputDescription"], PDO::PARAM_STR);
@@ -104,5 +75,3 @@ class historialModel {
     }
   }
 }
-
-

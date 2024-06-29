@@ -25,7 +25,6 @@ class RutasModelo
         } else {
             $pagina = "./Vistas/Dashboard/dashboard.vista.php";
         }   
-    
         return $pagina;
     }
 }
