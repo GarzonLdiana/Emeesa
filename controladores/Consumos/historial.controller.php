@@ -58,7 +58,7 @@ class historialController {
                         }).then(function(result){
                             if (result.value) {
                                 /** Redireccionar a la página principal de historial */
-                                window.location.href = "index.php?ruta=Historial/Verhistorial";
+                                window.location.href = "index.php?ruta=Consumos/Historial/historial";
                             }
                         })
                       </script>';
