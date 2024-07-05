@@ -47,6 +47,16 @@ require_once "./controladores/Financiamientos/Financiaciones.controller.php";
           <p>En esta sección, podrás consultar el estado y detalles de sus solicitudes de financiación:</p>
           <div class="row">
             <div class="col-md-12">
+<!-- Botón Añadir -->
+<div class="mb-3">
+            <a href="#" class="btn btn-success" onclick="abrirFormulario()">
+              <i class="fa fa-plus"></i> Generar solicitud
+            </a>
+          </div>
+          <div class="row">
+            <div class="col-md-12"></div>
+
+
 
            <!-- advanced Tables --> 
            <div class="panel panel-default">
@@ -55,12 +65,14 @@ require_once "./controladores/Financiamientos/Financiaciones.controller.php";
                     <table id="datatables" class="table table-sm table-striped table-bordered table-hover datatable">          
                       <thead class="table-header">
                         <tr>
-                          <th width="20%">Fecha de la solicitud</th>
-                          <th width="20%">Monto Financiado</th>
-                          <th width="20%">Plan de pago</th>
-                          <th width="20%">Estado</th>
-                          <th width="50%">Detalles</th>
-                          <th width="50%">Descargar</th>
+                          <th width="15%">Fecha de la solicitud</th>
+                          <th width="15%">Monto Financiado</th>
+                          <th width="15%">Plan de pago</th>
+                          <th width="15%">Estado</th>
+                          <th width="30%">Detalles</th>
+                          <th width="30%">Descargar</th>
+                          <th width="30%">Cancelar</th>
+                          
                         </tr>
                       </thead>
                       <tbody>
@@ -78,9 +90,16 @@ require_once "./controladores/Financiamientos/Financiaciones.controller.php";
 
                                 
                                   <a href="#" class="btn btn-warning btn-sm">
-                                    <i class="fa fa-download nav-icon"></i> <span>Descargas</span>
+                                    <i class="fa fa-download nav-icon"></i> <span>PDF</span>
                                   </a>
                                 </td>
+                                <td>
+                              
+                                  <a href="#" class="btn btn-danger btn-sm">
+                                    <i class="fa fa-trash nav-icon"></i> <span>Eliminar</span>
+                                  </a>
+                                </td>
+
                               </tr>';
                     }
                   ?>

@@ -1,5 +1,4 @@
 <?php
-
 /* =============================================================================================================
 * Desarrollado Por        : GAES 14
 * Fecha de Creación       : 18 Mayo 2024
@@ -8,13 +7,13 @@
 * Tipo                    : Modelo
 * ====================================================================================================================
 * Versión Descripción
-* [1.0.0.0] Modelo de la tabla facturas.
+* [1.0.0.0] Modelo de la tabla verificacion.
 * ====================================================================================================================
 * MODIFICACIONES:
 * ====================================================================================================================
 * Ver.      Fecha            Autor – Empresa                       Descripción
 * --------- ------------- -----------------------------------   -------------------------------------------------------
-* 1.0       18/05/2024    GAES 14 -  Emessa                     Versión inicial del modelo
+* 1.0       18/06/2024    GAES 14 -  Emeesa                     Versión inicial del modelo
 * ====================================================================================================================
 */
 
@@ -26,9 +25,9 @@ class VerificacionModel {
     try {
       /** Realizar la consulta a la base de datos */
       $conexion = Connection::connect();
-      $stmt = $conexion->prepare("SELECT lec.id_lectura, lec.fecha_lectura, lec. detalle_lectura, lec. registro_fotografico,
-                                  FROM toma de lectura AS lec
-                                  ORDER BY lec.id_lectura DESC");
+      $stmt = $conexion->prepare("SELECT tom.id_lectura, tom.fecha_lectura, tom.detalle_lectura, tom.registro_fotografico
+                                  FROM toma_de_lectura AS tom
+                                  ORDER BY tom.id_lectura DESC");
 
       /** Ejecutar la consulta */
       $stmt->execute(); 

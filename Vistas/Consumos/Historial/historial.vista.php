@@ -14,10 +14,13 @@ require_once "./controladores/Consumos/historial.controller.php";
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <!-- Incluye Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Incluye DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css"/>
+    <!--  estilos adicionales -->
 </head>
-
 <body>
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -37,7 +40,7 @@ require_once "./controladores/Consumos/historial.controller.php";
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>id consumo</th> <!-- Se corrigió el espaciado -->
+                                <th>id consumo</th> 
                                 <th>Periodo de Consumo</th>
                                 <th>Consumo kWh</th>
                             </tr>
@@ -45,7 +48,7 @@ require_once "./controladores/Consumos/historial.controller.php";
                         <tbody>
                             <tr>
                                 <td>001</td>
-                                <td>65</td> <!-- Se corrigió el orden de las columnas -->
+                                <td>65</td> 
                                 <td>2022-12</td>
                             </tr>
                             <tr>
@@ -131,12 +134,12 @@ require_once "./controladores/Consumos/historial.controller.php";
                         y: {
                             beginAtZero: true,
                             ticks: {
-                                color: '#ffffff' // Cambia el color de las etiquetas del eje Y
+                                color: '#ffffff' // Cambia el color del eje Y
                             }
                         },
                         x: {
                             ticks: {
-                                color: '#ffffff' // Cambia el color de las etiquetas del eje X
+                                color: '#ffffff' // Cambia el color del eje X
                             }
                         }
                     },
