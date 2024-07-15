@@ -1,13 +1,14 @@
 <?php
+
 /* =============================================================================================================
 * Desarrollado Por        : GAES 14
-* Fecha de Creación       : 18 Mayo 2024
+* Fecha de Creación       : 18 Junio 2024
 * Lenguaje Programación   : PHP
 * Producto o sistema      : IEMESSA
 * Tipo                    : Modelo
 * ====================================================================================================================
 * Versión Descripción
-* [1.0.0.0] Modelo de la tabla verificacion.
+* [1.0.0.0] Modelo de la tabla tarifas.
 * ====================================================================================================================
 * MODIFICACIONES:
 * ====================================================================================================================
@@ -19,15 +20,15 @@
 
 require_once "./modelos/connection.php";
 
-class VerificacionModel {
+class TarifasModel {
 
   public static function index() {
     try {
       /** Realizar la consulta a la base de datos */
       $conexion = Connection::connect();
-      $stmt = $conexion->prepare("SELECT tom.id_lectura, tom.fecha_lectura, tom.detalle_lectura, tom.registro_fotografico, tom.factura_id_factura
-                                  FROM toma_de_lectura AS tom
-                                  ORDER BY tom.id_lectura DESC");
+      $stmt = $conexion->prepare("SELECT tar.id_tarifa, tar.tipo_de_tarifa, tar. descripcion 
+                                  FROM tarifas AS tar
+                                  ORDER BY tar.id_tarifa DESC");
 
       /** Ejecutar la consulta */
       $stmt->execute(); 
@@ -55,7 +56,7 @@ class VerificacionModel {
       $conexion = Connection::connect();
 
       // Validar que no exista un registro con el mismo código
-      $stmt = $conexion->prepare("SELECT * FROM Verificacion  WHERE CODIGO = :code");
+      $stmt = $conexion->prepare("SELECT * FROM Facturas WHERE CODIGO = :code");
       $stmt->bindParam(":code", $data["addInputCode"], PDO::PARAM_STR);
       $stmt->execute();
 
@@ -69,13 +70,13 @@ class VerificacionModel {
                   confirmButtonText: "Aceptar"
                 }).then(function(result){
                   if (result.value) {
-                    window.location.href = "index.php?ruta=Verificacion/Verificacion/verificacion.crear";
+                    window.location.href = "index.php?ruta=Tarifas/tarifas/tarifa.crear";
                   }
                 });
               </script>';
       } else {
         // Crear la nueva consulta
-        $createStmt = $conexion->prepare("INSERT INTO Verificacion (codigo, descripcion, activo, user_create)
+        $createStmt = $conexion->prepare("INSERT INTO Facturas (codigo, descripcion, activo, user_create)
                                           VALUES (:addInputCode, :addInputDescription, :addInputActive, :userId)");
         $createStmt->bindParam(":addInputCode", $data["addInputCode"], PDO::PARAM_STR);
         $createStmt->bindParam(":addInputDescription", $data["addInputDescription"], PDO::PARAM_STR);

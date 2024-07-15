@@ -75,7 +75,7 @@ require_once "./controladores/Verificacion/verificacion.controller.php";
                             $Verificacion = VerificacionController::index();
                             foreach($Verificacion as $key => $Verificaciones){
                                 echo '<tr>
-                                        <td>'.$Verificaciones["id_lectura"].'</td>
+                                        <td>'.$Verificaciones["factura_id_factura"].'</td>
                                         <td>'.$Verificaciones["fecha_lectura"].'</td>
                                         <td>'.$Verificaciones["detalle_lectura"].'</td>
                                         <td>'.$Verificaciones["registro_fotografico"].'</td>';

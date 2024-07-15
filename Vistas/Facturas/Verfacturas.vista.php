@@ -48,6 +48,15 @@ require_once "./controladores/Facturas/Facturas.controller.php";
           <p>En esta sección, podrás consultar y descargar tus facturas:</p>
           <div class="row">
             <div class="col-md-12">
+   <!-- Botón Añadir -->
+          <div class="mb-3">
+            <a href="#" class="btn btn-success" onclick="abrirFormulario()">
+              <i class="fa fa-plus"></i> Ingresar registro
+            </a>
+          </div>
+          <div class="row">
+            <div class="col-md-12"></div>
+
               <!-- advanced Tables --> 
               <div class="panel panel-default">
                 <div class="panel-body">
