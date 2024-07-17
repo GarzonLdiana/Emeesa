@@ -5,14 +5,17 @@ require_once "./controladores/Facturas/Facturas.controller.php";
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Facturas</title>
-    <!-- Incluye DataTables CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"/>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css"/>
-    <!--  estilos adicionales -->
+  <meta charset="UTF-8">
+  <title>Facturas</title>
+  <!-- Incluye DataTables CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" />
+  <link rel="stylesheet" type="text/css"
+    href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css" />
+  <!--  estilos adicionales -->
 </head>
+
 <body>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -41,74 +44,74 @@ require_once "./controladores/Facturas/Facturas.controller.php";
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
               <i class="fas fa-minus"></i>
-            </button> 
+            </button>
           </div>
         </div>
         <div class="card-body">
           <p>En esta sección, podrás consultar y descargar tus facturas:</p>
           <div class="row">
             <div class="col-md-12">
-   <!-- Botón Añadir -->
-          <div class="mb-3">
-            <a href="#" class="btn btn-success" onclick="abrirFormulario()">
-              <i class="fa fa-plus"></i> Ingresar registro
-            </a>
-          </div>
-          <div class="row">
-            <div class="col-md-12"></div>
+              <!-- Botón Añadir -->
+              <div class="mb-3">
+                <a href="#" class="btn btn-success" onclick="abrirFormulario()">
+                  <i class="fa fa-plus"></i> Ingresar registro
+                </a>
+              </div>
+              <div class="row">
+                <div class="col-md-12"></div>
 
-              <!-- advanced Tables --> 
-              <div class="panel panel-default">
-                <div class="panel-body">
-                  <div class="table-responsive">
-                    <table id="datatables" class="table table-sm table-striped table-bordered table-hover datatable">          
-                      <thead class="table-header">
-                        <tr>
-                          <th width="20%">Número de Factura</th>
-                          <th width="30%">Fecha de emisión</th>
-                          <th width="30%">Detalle</th>
-                          <th width="50%">Descargar</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      <?php
-                        // Llamar al controlador para recuperar los registros de la tabla de base de datos
-                        $Facturas = FacturasController::index();
-                        foreach($Facturas as $key => $Factura){
+                <!-- advanced Tables -->
+                <div class="panel panel-default">
+                  <div class="panel-body">
+                    <div class="table-responsive">
+                      <table id="datatables" class="table table-sm table-striped table-bordered table-hover datatable">
+                        <thead class="table-header">
+                          <tr>
+                            <th width="20%">Número de Factura</th>
+                            <th width="30%">Fecha de emisión</th>
+                            <th width="30%">Detalle</th>
+                            <th width="50%">Descargar</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <?php
+                          // Llamar al controlador para recuperar los registros de la tabla de base de datos
+                          $Facturas = FacturasController::index();
+                          foreach ($Facturas as $key => $Factura) {
                             echo '<tr>
-                                    <td>'.$Factura["id_factura"].'</td>
-                                    <td>'.$Factura["fecha_emision"].'</td>
-                                    <td>'.$Factura["detalle"].'</td>';
-                            
+                                    <td>' . $Factura["id_factura"] . '</td>
+                                    <td>' . $Factura["fecha_emision"] . '</td>
+                                    <td>' . $Factura["detalle"] . '</td>';
+
                             echo '<td>
                                     <a href="#" class="btn btn-warning btn-sm">
                                     <i class="fa fa-download nav-icon"></i> <span>Descargas</span>
                                     </a>
                                 </td>
                             </tr>';
-                        }
-                      ?>
-                      </tbody>
-                    </table>
-                    <div id="factura-consulta" style="display: none;">
-                      <h3>Factura Consultada</h3>
-                      <iframe id="factura-iframe" width="100%" height="500" frameborder="0"></iframe>
+                          }
+                          ?>
+                        </tbody>
+                      </table>
+                      <div id="factura-consulta" style="display: none;">
+                        <h3>Factura Consultada</h3>
+                        <iframe id="factura-iframe" width="100%" height="500" frameborder="0"></iframe>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <!-- /.card-body -->
+          <!-- /.card-body -->
 
-        <!-- /.card-footer-->
-      </div>
-      <!-- /.card -->
+          <!-- /.card-footer-->
+        </div>
+        <!-- /.card -->
 
     </section>
     <!-- /.content -->
-  </div>  <!-- /.content-wrapper -->
+  </div> <!-- /.content-wrapper -->
 
   <!-- Incluye jQuery -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -128,10 +131,10 @@ require_once "./controladores/Facturas/Facturas.controller.php";
 
   <script>
     //$(document).ready(function() {
-   //     $('#datatables').DataTable({
+    //     $('#datatables').DataTable({
     //        // configuración adicionales para DataTables
-   //     });
-   // });
+    //     });
+    // });
 
     function consultarFactura(rutaFactura) {
       // Mostrar el área de consulta y cargar la factura en el iframe
@@ -143,4 +146,5 @@ require_once "./controladores/Facturas/Facturas.controller.php";
     }
   </script>
 </body>
+
 </html>

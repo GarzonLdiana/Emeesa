@@ -47,14 +47,14 @@
            
         </li>       -->
 
-      
-        
+
+
 
         <li class="nav-item">
           <a href="#" class="nav-link">
 
             <p>
-            <i class="nav-icon fas fa-file"></i>
+              <i class="nav-icon fas fa-file"></i>
               Facturas
               <i class="right fas fa-angle-left"></i>
             </p>
@@ -66,7 +66,7 @@
                 <p>Consultar </p>
               </a>
             </li>
-           
+
 
           </ul>
         </li>
@@ -77,7 +77,7 @@
           <a href="#" class="nav-link">
 
             <p>
-            <i class="nav-icon fas fa-chart-pie"></i>
+              <i class="nav-icon fas fa-chart-pie"></i>
               Verificacion de Consumo
               <i class="right fas fa-angle-left"></i>
             </p>
@@ -105,7 +105,7 @@
           <a href="#" class="nav-link">
 
             <p>
-            <i class="nav-icon fas fa-coins"></i>
+              <i class="nav-icon fas fa-coins"></i>
               Financiamiento
               <i class="right fas fa-angle-left"></i>
             </p>
@@ -126,7 +126,7 @@
           <a href="#" class="nav-link">
 
             <p>
-            <i class="nav-icon fas fa-table"></i>
+              <i class="nav-icon fas fa-table"></i>
               Tarifas Aplicadas
               <i class="right fas fa-angle-left"></i>
             </p>
@@ -142,99 +142,99 @@
           </ul>
         </li>
 
-     
+
         <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-        <li class="nav-item">
-            <a href="index.php?ruta=Dashboard/dashboard" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
-              <p>
-                Noticias y Novedades
-              </p>
-            </a>
+            <li class="nav-item">
+              <a href="index.php?ruta=Dashboard/dashboard" class="nav-link">
+                <i class="nav-icon far fa-image"></i>
+                <p>
+                  Noticias y Novedades
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-edit"></i>
+                <p>
+                  PQRS
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="index.php?ruta=PQRS/pqrs" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Información</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="index.php?ruta=PQRS/Consulta/Consulta" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Consultar</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="index.php?ruta=PQRS/Ingreso/Ingreso" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Ingreso</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Seguridad
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="index.php?ruta=Roles/ListarRoles" class="nav-link">
+                    <i class="fas fa-user nav-icon"></i>
+                    <p>Usuarios</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="index.php?ruta=Roles/roles" class="nav-link">
+                    <i class="fas fa-users nav-icon"></i>
+                    <p>Crear Rol</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+
+
+
+
+
+
+
+
+
+
+
+          </ul>
           </li>
 
-          <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-edit"></i>
-            <p>
-              PQRS
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="index.php?ruta=PQRS/pqrs" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Información</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="index.php?ruta=PQRS/Consulta/Consulta" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Consultar</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="index.php?ruta=PQRS/Ingreso/Ingreso" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Ingreso</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-
-        
-            <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Seguridad
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="index.php?ruta=Roles/ListarRoles" class="nav-link">
-                <i class="fas fa-user nav-icon"></i>
-                  <p>Usuarios</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="index.php?ruta=Roles/roles" class="nav-link">
-                  <i class="fas fa-users nav-icon"></i>
-                  <p>Crear Rol</p>
-                </a>
-              </li>
-            </ul>
-          </li>
 
 
 
 
-
-
-
-
-
-
-
-
-          </ul>
-        </li>
-
-
-
-
-
-        <!-- /. Aqui pegar -->
+          <!-- /. Aqui pegar -->
       </ul>
     </nav>
     <!-- /.sidebar-menu -->
 
 
-    
+
   </div>
   <!-- /.sidebar -->
 </aside>

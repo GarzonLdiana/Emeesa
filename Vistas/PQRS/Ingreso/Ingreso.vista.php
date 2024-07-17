@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        
+
                     </ol>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                         <i class="fas fa-minus"></i>
                     </button>
-                   
+
                 </div>
             </div>
             <div class="card-body">

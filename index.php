@@ -12,11 +12,11 @@ require_once "Modelos/rutas.modelo.php";
 
 /** INICIALIZAR CLASES */
 
-$rutas = New RutasControlador();
+$rutas = new RutasControlador();
 
 /** EJECUTAR LA FUNCION INICIALIZAR PLANTILLA */
 
-$rutas -> IniciarPlantilla();
+$rutas->IniciarPlantilla();
 
 
 

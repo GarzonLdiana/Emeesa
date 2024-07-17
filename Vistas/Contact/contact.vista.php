@@ -17,10 +17,10 @@
                     <div class="form-group">
                         <label for="nombre">Nombres - Apellidos:</label>
                         <textarea class="form-control" id="nombres" name="nombres" rows="1" required></textarea>
-                        
+
                         <label for="email">Correo Electrónico:</label>
                         <textarea class="form-control" id="email" name="email" rows="1" required></textarea>
-                        
+
                         <label for="phone">Celular:</label>
                         <textarea class="form-control" id="celular" name="celular" rows="1" required></textarea>
                         <p></p>

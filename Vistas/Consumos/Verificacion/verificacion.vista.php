@@ -77,13 +77,20 @@ require_once "./controladores/Verificacion/verificacion.controller.php";
                                 echo '<tr>
                                         <td>'.$Verificaciones["factura_id_factura"].'</td>
                                         <td>'.$Verificaciones["fecha_lectura"].'</td>
-                                        <td>'.$Verificaciones["detalle_lectura"].'</td>
-                                        <td>'.$Verificaciones["registro_fotografico"].'</td>';
+                                        <td>'.$Verificaciones["detalle_lectura"].'</td>';
+                                      
                                 
-                                echo '<td>
-                                        <a href="#" class="btn btn-warning btn-sm">
-                                        <i class="fa fa-download nav-icon"></i> <span>PDF</span>
-                                        </a>
+                              // Generar el nombre del archivo de imagen basado en el número de factura
+                              $nombreImagen = $Verificaciones["factura_id_factura"] . ".jpeg";
+
+                              echo '<td>
+                                      <img src="./assets/imagenes/'.$nombreImagen.'" alt="Foto del Medidor" width="100"/>
+                                  </td>';
+                              
+                              echo '<td>
+                                      <a href="#" class="btn btn-warning btn-sm">
+                                      <i class="fa fa-download nav-icon"></i> <span>PDF</span>
+                                      </a>
                                     </td>
                                 </tr>';
                             }
