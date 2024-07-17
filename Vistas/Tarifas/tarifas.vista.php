@@ -15,7 +15,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h2>Tarifas Aplicadas</h2>
-        <p>En esta sección, podrás consultar el Historial de Tarifas Aplicadas.</p>
+        
     </section>
 
     <div class="card">
@@ -27,13 +27,26 @@
             </div>
         </div>
         
+     
+
         <div class="card-body">
+        <p>En esta sección, podrás consultar el Historial de Tarifas Aplicadas.</p>
+
+        <!-- Botón Añadir -->
+        <div class="mb-3">
+            <a href="#" class="btn btn-success" onclick="abrirFormulario()">
+              <i class="fa fa-plus"></i> Ingresar registro
+            </a>
+          </div>
+          <div class="row">
+            <div class="col-md-12"></div>
+            
             <table id="tablaTarifas" class="table display">
                 <thead>
                     <tr>
                         <th>Año</th>
                         <th>Mes</th>
-                        <th>Acción</th>
+                        <th>Consultar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -62,8 +75,11 @@
                             <td style='text-align: center; border: 1px solid #f7eeee; padding: 10px;'>{$tarifa['año']}</td>
                             <td style='text-align: center; border: 1px solid #f7eeee; padding: 10px;'>{$tarifa['mes']}</td>
                             <td style='text-align: center; border: 1px solid #f7eeee; padding: 10px;'>
-                                <button onclick=\"abrirPDF('{$tarifa['archivo']}')\">Abrir PDF</button>
-                            </td>
+                                
+                            <a href='#' class='btn btn-warning btn-sm' onclick=\"abrirPDF('{$tarifa['archivo']}')\">
+                                        <i class='fa fa-file-pdf nav-icon'></i> Abrir PDF
+                                    </a>
+                                </td>
                         </tr>";
                     }
                     ?>

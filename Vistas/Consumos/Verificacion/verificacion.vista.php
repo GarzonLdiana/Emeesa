@@ -104,6 +104,9 @@ require_once "./controladores/Verificacion/verificacion.controller.php";
         </div>
         <!-- /.card-body -->
 
+
+        
+
         <!-- /.card-footer-->
       </div>
       <!-- /.card -->
@@ -136,7 +139,7 @@ require_once "./controladores/Verificacion/verificacion.controller.php";
     // });
 
     function consultarVerificacion(rutaVerificacion) {
-      // Mostrar el área de consulta y cargar la factura en el iframe
+      // Mostrar el área de consulta y cargar la consulta en el iframe
       const verificacionConsulta = document.getElementById('verificacion-consulta');
       const verificacionIframe = document.getElementById('verificacion-iframe');
       verificacionIframe.src = rutaVerificacion;
