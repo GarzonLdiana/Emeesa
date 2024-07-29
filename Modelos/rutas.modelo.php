@@ -16,7 +16,8 @@ class RutasModelo
             $ruta == "Dashboard/dashboard" ||
             $ruta == "Roles/ListarRoles" ||
             $ruta == "Roles/roles" ||
-            $ruta == "Facturas/Verfacturas"
+            $ruta == "Facturas/Verfacturas" ||
+            $ruta == "Facturas/Verfacturas.crear"
         ) 
         {
             $pagina = "./Vistas/" . $ruta . ".vista.php";

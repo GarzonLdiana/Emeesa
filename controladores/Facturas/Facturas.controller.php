@@ -19,68 +19,67 @@
 
 
     require_once "./Modelos/Facturas.model.php";
-    
-    class FacturasController{
 
-      	  
-      // Método para recuperar listado de los registros
-      static public function  index(){
+class FacturasController {
 
-        // LLamar al modelo para recuperar todos los registros de la tabla
-        $data = FacturasModel::index();
-        return  $data;
-      }
-
-
-      // Método para crear registros
-      static function create()
-      {
-
-         /** Validar que vengan datos en las variables pasadas desde la vista */
-         if (isset($_POST["addInputDescription"])
-             && isset($_POST["addInputCode"])
-             && isset($_POST["addInputActive"])
-         ) 
-         {
-           $data = array(	"addInputDescription" => $_POST["addInputDescription"],
-                           "addInputActive" => $_POST["addInputActive"],
-                           "addInputCode" => $_POST["addInputCode"],
-                           //"userId" => $_SESSION["userId"] 
-                           "userId" => 1
-                       );
-
-
-                       
-           // Ejecutar el metodo create del modelo
-           $response =FacturasModel::create($data);
-           
-            //ENVIAR MENSAJE DE REGISTRO ALMACENADO CON ÉXITO
-           if($response == "Ok")
-               {
-                 /** Enviar mensaje de creación correcta */
-                   echo '<script>
-                   
-                           Swal.fire({
-                             icon: "success",
-                             title: "La factura  ha sido generada de forma correcta.",
-                         
-                             showConfirmButton: true,
-                             confirmButtonText: "Aceptar"
-                             }).then(function(result){
-                                         if (result.value) {
-                                             /**Redireccionar a la página principal de facturas */
-                                             window.location.href = "index.php?ruta=Facturas/Verfacturas";
-                                         }
-                                     })
-                         </script>';
-
-               }
-               else{
-                   echo "error controlador";
-               }
-       }
-
-      }
-
-
+    // Método para recuperar listado de los registros
+    static public function index() {
+        return FacturasModel::index();
     }
+
+    // Método para crear registros
+    static function create() {
+      
+        if (isset($_POST["addInputDetalle"]) &&
+            isset($_POST["addInputCode"]) &&
+            isset($_POST["addInputMonto"]) &&
+            isset($_POST["addInputFechaEmision"])) 
+        {
+            $data = array(
+                "addInputDetalle" => $_POST["addInputDetalle"],
+                "addInputFechaEmision" => $_POST["addInputFechaEmision"],
+                "addInputMonto" => $_POST["addInputMonto"],
+                "addInputCode" => $_POST["addInputCode"],
+                "userId" => 1 // Cambia esto según tu lógica de usuario
+            );
+            
+            $response = FacturasModel::create($data);
+            
+            if ($response == "Ok") {
+                echo '<script>
+                        Swal.fire({
+                            icon: "success",
+                            title: "La factura ha sido cargada de forma correcta.",
+                            showConfirmButton: true,
+                            confirmButtonText: "Aceptar"
+                        }).then(function(result){
+                            if (result.value) {
+                                window.location.href = "index.php?ruta=Facturas/Verfacturas";
+                            }
+                        });
+                      </script>';
+            } else {
+                echo '<script>
+                        Swal.fire({
+                            icon: "error",
+                            title: "Error al guardar la factura.",
+                            text: "Por favor, inténtalo de nuevo.",
+                            showConfirmButton: true,
+                            confirmButtonText: "Aceptar"
+                        });
+                      </script>';
+            }
+        } else {
+            echo '<script>
+                    Swal.fire({
+                        icon: "warning",
+                        title: "Datos incompletos.",
+                        text: "Por favor, completa todos los campos.",
+                        showConfirmButton: true,
+                        confirmButtonText: "Aceptar"
+                    });
+                  </script>';
+        }
+    }
+}
+
