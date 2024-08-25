@@ -92,7 +92,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="index.php?ruta=Consumos/Verificacion/verificacion" class="nav-link">
+              <a href="index.php?ruta=Consumos/Lecturas/Lecturas" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Verificacion de Lecturas</p>
               </a>
@@ -165,23 +165,12 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="index.php?ruta=PQRS/pqrs" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Información</p>
-                  </a>
-                </li>
-                <li class="nav-item">
                   <a href="index.php?ruta=PQRS/Consulta/Consulta" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Consultar</p>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a href="index.php?ruta=PQRS/Ingreso/Ingreso" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Ingreso</p>
-                  </a>
-                </li>
+                
               </ul>
             </li>
 
@@ -196,18 +185,12 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="index.php?ruta=Roles/ListarRoles" class="nav-link">
+                  <a href="index.php?ruta=Roles/Roles" class="nav-link">
                     <i class="fas fa-user nav-icon"></i>
-                    <p>Usuarios</p>
+                    <p>Roles</p>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a href="index.php?ruta=Roles/roles" class="nav-link">
-                    <i class="fas fa-users nav-icon"></i>
-                    <p>Crear Rol</p>
-                  </a>
-                </li>
-              </ul>
+                </ul>
             </li>
 
 

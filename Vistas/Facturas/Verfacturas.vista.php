@@ -6,30 +6,38 @@ require_once "./controladores/Facturas/Facturas.controller.php";
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Facturas</title>
-  <!-- Incluye DataTables CSS -->
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" />
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css" />
+    <meta charset="UTF-8">
+    <title>Facturas</title>
+    <!-- Incluye DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css" />
+    <!-- Estilos adicionales -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 
 <body>
-  <div class="content-wrapper">
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Facturas</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <!-- Breadcrumbs -->
-            </ol>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Facturas</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <!-- Breadcrumbs -->
+                            <li class="breadcrumb-item"><a href="index.php">Inicio</a></li>
+                            <li class="breadcrumb-item active">Facturas</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
 
+        <!-- Main content -->
     <section class="content">
       <div class="card">
         <div class="card-header">
@@ -44,8 +52,9 @@ require_once "./controladores/Facturas/Facturas.controller.php";
           <div class="row">
             <div class="col-md-12">
               <div class="mb-3">
-                <a href="index.php?ruta=Facturas/Verfacturas.crear" class="btn btn-success" onclick="abrirFormulario()">
-                  <i class="fa fa-plus"></i> Ingresar registro
+                 <!-- Botón Añadir -->
+                <a href="index.php?ruta=Facturas/Verfacturas.crear" class="btn btn-success">
+                  <i class="fa fa-plus"></i> Ingresar Factura
                 </a>
               </div>
               <div class="panel panel-default">
@@ -55,23 +64,24 @@ require_once "./controladores/Facturas/Facturas.controller.php";
                       <thead class="table-header">
                         <tr>
                           <th width="20%">Número de Factura</th>
-                          <th width="30%">Fecha de emisión</th>
+                          <th width="20%">Fecha de emisión</th>
+                          <th width="20%">Monto</th>
                           <th width="30%">Detalle</th>
-                          <th width="20%">Descargar</th>
+                          <th width="10%">Descargar</th>
                         </tr>
                       </thead>
                       <tbody>
                         <?php
                         // Llamar al controlador para recuperar los registros de la tabla de base de datos
-                        $Facturas = FacturasController::index();
-                        foreach ($Facturas as $Factura) {
+                        $facturas = FacturasController::index();
+                        foreach ($facturas as $factura) {
                           echo '<tr>
-                                  <td>' . htmlspecialchars($Factura["id_factura"]) . '</td>
-                                  <td>' . htmlspecialchars($Factura["fecha_emision"]) . '</td>
-                                  <td>' . htmlspecialchars($Factura["detalle"]) . '</td>
-                                  <td>
-                                    <a href="descargarFactura.php?id=' . $Factura["id_factura"] . '" class="btn btn-warning btn-sm">
-                                      <i class="fa fa-download nav-icon"></i> <span>Descargas</span>
+                                  <td>' . htmlspecialchars($factura["id_factura"]) . '</td>
+                                  <td>' . htmlspecialchars($factura["fecha_emision"]) . '</td>
+                                  <td>' . htmlspecialchars($factura["monto"]) . '</td>
+                                  <td>' . htmlspecialchars($factura["detalle"]) . '</td>
+                                  <td> <a href="assets/Docs/' . htmlspecialchars($factura["pdf_path"]) . '" class="btn btn-warning btn-sm" target="_blank">
+                                      <i class="fa fa-download nav-icon"></i> <span>Descargar</span>
                                     </a>
                                   </td>
                                 </tr>';
@@ -99,7 +109,7 @@ require_once "./controladores/Facturas/Facturas.controller.php";
   <script type="text/javascript" src="plantilla.js"></script>
 
   <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
       $('#datatables').DataTable();
     });
 

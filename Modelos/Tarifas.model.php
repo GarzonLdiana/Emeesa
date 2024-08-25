@@ -1,108 +1,80 @@
 <?php
 
-/* =============================================================================================================
-* Desarrollado Por        : GAES 14
-* Fecha de Creación       : 18 Junio 2024
-* Lenguaje Programación   : PHP
-* Producto o sistema      : IEMESSA
-* Tipo                    : Modelo
-* ====================================================================================================================
-* Versión Descripción
-* [1.0.0.0] Modelo de la tabla tarifas.
-* ====================================================================================================================
-* MODIFICACIONES:
-* ====================================================================================================================
-* Ver.      Fecha            Autor – Empresa                       Descripción
-* --------- ------------- -----------------------------------   -------------------------------------------------------
-* 1.0       18/06/2024    GAES 14 -  Emeesa                     Versión inicial del modelo
-* ====================================================================================================================
-*/
-
 require_once "./modelos/connection.php";
 
 class TarifasModel {
-
-  public static function index() {
-    try {
-      /** Realizar la consulta a la base de datos */
-      $conexion = Connection::connect();
-      $stmt = $conexion->prepare("SELECT tar.id_tarifa, tar.tipo_de_tarifa, tar. descripcion 
-                                  FROM tarifas AS tar
-                                  ORDER BY tar.id_tarifa DESC");
-
-      /** Ejecutar la consulta */
-      $stmt->execute(); 
-
-      /** Devuelve los datos consultados */
-      $result = $stmt->fetchAll();
-
-      /** Cerrar el cursor */
-      $stmt->closeCursor();
-
-      return $result;
-
-    } catch (Exception $e) {
-      echo $e->getMessage();
-      die();
-    } finally {
-      /** Liberar la conexión */
-      $conexion = null;
-    }
-  }
-
-  // Método para guardar registro en la tabla de la base de datos
-  public static function create($data) {
-    try {
-      $conexion = Connection::connect();
-
-      // Validar que no exista un registro con el mismo código
-      $stmt = $conexion->prepare("SELECT * FROM Facturas WHERE CODIGO = :code");
-      $stmt->bindParam(":code", $data["addInputCode"], PDO::PARAM_STR);
-      $stmt->execute();
-
-      if ($stmt->rowCount() > 0) {
-        // Ya existe un registro con ese código
-        echo '<script>
-                Swal.fire({
-                  icon: "error",
-                  title: "La consulta ya fue generada.",
-                  showConfirmButton: true,
-                  confirmButtonText: "Aceptar"
-                }).then(function(result){
-                  if (result.value) {
-                    window.location.href = "index.php?ruta=Tarifas/tarifas/tarifa.crear";
-                  }
-                });
-              </script>';
-      } else {
-        // Crear la nueva consulta
-        $createStmt = $conexion->prepare("INSERT INTO Facturas (codigo, descripcion, activo, user_create)
-                                          VALUES (:addInputCode, :addInputDescription, :addInputActive, :userId)");
-        $createStmt->bindParam(":addInputCode", $data["addInputCode"], PDO::PARAM_STR);
-        $createStmt->bindParam(":addInputDescription", $data["addInputDescription"], PDO::PARAM_STR);
-        $createStmt->bindParam(":addInputActive", $data["addInputActive"], PDO::PARAM_INT);
-        $createStmt->bindParam(":userId", $data["userId"], PDO::PARAM_INT);
-
-        if ($createStmt->execute()) {
-          return "Ok";
-        } else {
-          return "Error Modelo";
+    // Método para recuperar todos los tarifas
+    public static function index() {
+        try {
+            $conexion = Connection::connect();
+            $stmt = $conexion->prepare("SELECT tar.id_tarifa, tar.mes_año_tarifa, tar.pdf_path
+                                        FROM Tarifa AS tar
+                                        ORDER BY tar.id_tarifa DESC");
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            error_log("Error en TarifasModel::index(): " . $e->getMessage());
+            return [];
+        } finally {
+            $conexion = null;
         }
-      }
-
-    } catch (Exception $e) {
-      echo $e->getMessage();
-      die();
-    } finally {
-      if (isset($stmt)) {
-        $stmt->closeCursor();
-      }
-      if (isset($createStmt)) {
-        $createStmt->closeCursor();
-      }
-      $conexion = null;
     }
-  }
+
+    // Método para guardar registro en la tabla de la base de datos
+    public static function create($data) {
+        try {
+            $conexion = Connection::connect();
+            $stmt = $conexion->prepare("SELECT * FROM Tarifa WHERE id_tarifa = :code");
+            $stmt->bindParam(":code", $data["addInputCode"], PDO::PARAM_STR);
+            $stmt->execute();
+
+            if ($stmt->rowCount() > 0) {
+                return "Tarifa ya ingresada";
+            } else {
+                // Crear la nueva Tarifa
+                $createStmt = $conexion->prepare("INSERT INTO Tarifa (id_tarifa, mes_año_tarifa, pdf_path)
+                                                  VALUES (:addInputCode, :addInputMesAño, :pdfPath)");
+                $createStmt->bindParam(":addInputCode", $data["addInputCode"], PDO::PARAM_STR);
+                $createStmt->bindParam(":addInputMesAño", $data["addInputMesAño"], PDO::PARAM_STR);
+                $createStmt->bindParam(":pdfPath", $data["pdfPath"], PDO::PARAM_STR);
+
+                if ($createStmt->execute()) {
+                    return "Ok";
+                } else {
+                    error_log("Error en TarifasModel::create(): " . implode(", ", $createStmt->errorInfo()));
+                    return "Error al guardar la tarifa";
+                }
+            }
+        } catch (Exception $e) {
+            error_log("Error en TarifasModel::create(): " . $e->getMessage());
+            return "Error en la operación";
+        } finally {
+            if (isset($stmt)) {
+                $stmt->closeCursor();
+            }
+            if (isset($createStmt)) {
+                $createStmt->closeCursor();
+            }
+            $conexion = null;
+        }
+    }
+
+    // Método para subir el archivo PDF
+    public static function uploadFile($file) {
+        $targetDir = "assets/Docs/"; // Directorio donde se guardarán los archivos
+        $targetFile = $targetDir . basename($file["name"]);
+        $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+        // Verificar si es un archivo PDF
+        if ($fileType != "pdf") {
+            return false;
+        }
+
+        // Mover el archivo a la carpeta de destino
+        if (move_uploaded_file($file["tmp_name"], $targetFile)) {
+            return $targetFile; // Retorna la ruta del archivo subido
+        } else {
+            return false; // Retorna false si hubo un error al mover el archivo
+        }
+    }
 }
-
-

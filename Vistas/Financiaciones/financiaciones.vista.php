@@ -6,37 +6,40 @@ require_once "./controladores/Financiamientos/Financiaciones.controller.php";
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Financiamiento</title>
-  <!-- Incluye DataTables CSS -->
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" />
-  <link rel="stylesheet" type="text/css"
-    href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css" />
-  <!-- Estilos adicionales -->
+    <meta charset="UTF-8">
+    <title>Financiamientos</title>
+    <!-- Incluye DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css" />
+    <!-- Estilos adicionales -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 
 <body>
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Financiamientos</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <!-- Breadcrumbs -->
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Financiamientos</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <!-- Breadcrumbs -->
+                            <li class="breadcrumb-item"><a href="index.php">Inicio</a></li>
+                            <li class="breadcrumb-item active">Financiamientos</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
 
+        <!-- Main content -->
     <!-- Main content -->
     <section class="content">
-
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
@@ -47,80 +50,67 @@ require_once "./controladores/Financiamientos/Financiaciones.controller.php";
           </div>
         </div>
         <div class="card-body">
-          <p>En esta sección, podrás consultar el estado y detalles de sus solicitudes de financiación:</p>
+          <p>En esta sección, podrás consultar el estado y detalles de tus solicitudes de financiación:</p>
           <div class="row">
             <div class="col-md-12">
               <!-- Botón Añadir -->
               <div class="mb-3">
-                <a href="#" class="btn btn-success" onclick="abrirFormulario()">
-                  <i class="fa fa-plus"></i> Generar solicitud
+                <a href="index.php?ruta=Financiaciones/financiaciones.crear" class="btn btn-success">
+                  <i class="fa fa-plus"></i> Ingresar Financiación
                 </a>
               </div>
-              <div class="row">
-                <div class="col-md-12"></div>
-                <!-- advanced Tables -->
-                <div class="panel panel-default">
-                  <div class="panel-body">
-                    <div class="table-responsive">
-                      <table id="datatables" class="table table-sm table-striped table-bordered table-hover datatable">
-                        <thead class="table-header">
-                          <tr>
-                            <th width="15%">Fecha de la solicitud</th>
-                            <th width="15%">Monto Financiado</th>
-                            <th width="15%">Plan de pago</th>
-                            <th width="15%">Estado</th>
-                            <th width="30%">Detalles</th>
-                            <th width="30%">Descargar</th>
-                            <th width="30%">Cancelar</th>
-
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <?php
-                          // Llamar al controlador para recuperar los registros de la tabla de base de datos
-                          $Financiaciones = FinanciacionesController::index();
-                          foreach ($Financiaciones as $key => $financiacion) {
-                            echo '<tr>
-                                <td>' . $financiacion["fecha_solicitud"] . '</td>
-                                <td>' . $financiacion["monto_financiado"] . '</td>
-                                <td>' . $financiacion["plan_pago"] . '</td>
-                                <td>' . $financiacion["estado"] . '</td>
-                                <td>' . $financiacion["detalles"] . '</td>
-                                <td>
-
-                                
-                                  <a href="#" class="btn btn-warning btn-sm">
-                                    <i class="fa fa-download nav-icon"></i> <span>PDF</span>
-                                  </a>
-                                </td>
-                                <td>
-                              
-                                  <a href="#" class="btn btn-danger btn-sm">
-                                    <i class="fa fa-trash nav-icon"></i> <span>Eliminar</span>
-                                  </a>
-                                </td>
-
-                              </tr>';
-                          }
-                          ?>
-                        </tbody>
-                      </table>
-                      <div id="financiaciones-consulta" style="display: none;">
-                        <h3>Financiación Consultada</h3>
-                        <iframe id="financiaciones-iframe" width="100%" height="500" frameborder="0"></iframe>
-                      </div>
+              <!-- advanced Tables -->
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <div class="table-responsive">
+                    <table id="datatables" class="table table-sm table-striped table-bordered table-hover datatable">
+                      <thead class="table-header">
+                        <tr>
+                          <th width="15%">Número de acuerdo de Pago</th>
+                          <th width="15%">Fecha de Respuesta</th>
+                          <th width="15%">Monto Financiado</th>
+                          <th width="15%">Plan de pago</th>
+                          <th width="15%">Estado</th>
+                          <th width="30%">Detalles</th>
+                          <th width="30%">Descargar</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                        // Llamar al controlador para recuperar los registros de la tabla de base de datos
+                        $financiaciones = FinanciacionesController::index();
+                        foreach ($financiaciones as $financiacion) {
+                          echo '<tr>
+                                  <td>' . htmlspecialchars($financiacion["id_financiaciones"]) . '</td>
+                                  <td>' . htmlspecialchars($financiacion["fecha_respuesta"]) . '</td>
+                                  <td>' . htmlspecialchars($financiacion["monto_financiado"]) . '</td>
+                                  <td>' . htmlspecialchars($financiacion["plan_pago"]) . '</td>
+                                  <td>' . htmlspecialchars($financiacion["estado"]) . '</td>
+                                  <td>' . htmlspecialchars($financiacion["detalles"]) . '</td>
+                                  <td> <a href="assets/Docs/' . htmlspecialchars($financiacion["pdf_path"]) . '" class="btn btn-warning btn-sm" target="_blank">
+                                        <i class="fa fa-download nav-icon"></i> <span>Descargar</span>
+                                      </a>
+                                  </td>
+                                </tr>';
+                        }
+                        ?>
+                      </tbody>
+                    </table>
+                    <div id="financiaciones-consulta" style="display: none;">
+                      <h3>Financiación Consultada</h3>
+                      <iframe id="financiaciones-iframe" width="100%" height="500" frameborder="0"></iframe>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <!-- /.card-body -->
-
-          <!-- /.card-footer-->
         </div>
-        <!-- /.card -->
+        <!-- /.card-body -->
 
+        <!-- /.card-footer-->
+      </div>
+      <!-- /.card -->
     </section>
     <!-- /.content -->
   </div> <!-- /.content-wrapper -->
@@ -139,15 +129,11 @@ require_once "./controladores/Financiamientos/Financiaciones.controller.php";
   <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
 
   <!-- Incluye script -->
-  <script src="plantilla.js"></script>
-
+  
   <script>
     $(document).ready(function () {
-      if (!$.fn.DataTable.isDataTable('#datatables')) {
-        $('#datatables').DataTable({
-          // configuración adicional para DataTables
-        });
-      }
+      $('#datatables').DataTable();
+      // configuración adicional para DataTables
     });
 
     function consultarFinanciaciones(rutaFinanciaciones) {

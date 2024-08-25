@@ -7,17 +7,22 @@ class RutasModelo
     {
         if (
             $ruta == "Consumos/Historial/historial" ||
-            $ruta == "Consumos/Verificacion/verificacion" ||
+            $ruta == "Consumos/Historial/historial.crear" ||
+            $ruta == "Consumos/Lecturas/Lecturas" ||
+            $ruta == "Consumos/Lecturas/Lecturas.crear" ||
             $ruta == "Financiaciones/financiaciones" ||
+            $ruta == "Financiaciones/financiaciones.crear" ||
             $ruta == "Tarifas/tarifas" ||
+            $ruta == "Tarifas/tarifas.crear" ||
             $ruta == "PQRS/Consulta/Consulta" ||
-            $ruta == "PQRS/Ingreso/Ingreso" ||
-            $ruta == "PQRS/pqrs" ||
+            $ruta == "PQRS/Ingresopqrs.crear" ||
             $ruta == "Dashboard/dashboard" ||
-            $ruta == "Roles/ListarRoles" ||
-            $ruta == "Roles/roles" ||
+            $ruta == "Roles/Roles.crear" ||
+            $ruta == "Roles/Roles" ||
             $ruta == "Facturas/Verfacturas" ||
-            $ruta == "Facturas/Verfacturas.crear"
+            $ruta == "Facturas/Verfacturas.crear" ||
+            $ruta == "Login/login" || // Ruta para la vista de inicio de sesión
+            $ruta == "User/user" // Ruta para la vista de gestión de usuarios
         ) 
         {
             $pagina = "./Vistas/" . $ruta . ".vista.php";

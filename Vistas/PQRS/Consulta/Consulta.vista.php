@@ -5,14 +5,14 @@ require_once "./controladores/PQRS/Pqrs.controller.php";
 <!DOCTYPE html>
 <html lang="es">
 
-<head>
+<>
   <meta charset="UTF-8">
-  <title>Historico de PQRS</title>
+  <title>Historico de PQRSF</title>
   <!-- Incluye DataTables CSS -->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" />
-  <link rel="stylesheet" type="text/css"
-    href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css" />
-  <!-- estilos adicionales -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css" />
+  <!-- Agrega Bootstrap CSS si es necesario -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -23,11 +23,13 @@ require_once "./controladores/PQRS/Pqrs.controller.php";
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Peticiones, Quejas, Reclamos y Sugerencias</h1>
+            <h1>Peticiones, Quejas, Reclamos, Sugerencias y Felicitaciones</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <!-- Breadcrumbs -->
+              <li class="breadcrumb-item"><a href="index.php?ruta=PQRS/Consulta/Consulta">Inicio</a></li>
+              <li class="breadcrumb-item active">PQRSF</li>
             </ol>
           </div>
         </div>
@@ -46,30 +48,28 @@ require_once "./controladores/PQRS/Pqrs.controller.php";
           </div>
         </div>
         <div class="card-body">
-          <p>En esta sección, podrás ingresar, consultar y descargar PQRS:</p>
+          <p>En esta sección, podrás ingresar y consultar tus PQRSF:</p>
           <div class="row">
             <div class="col-md-12">
               <!-- Botón Añadir -->
               <div class="mb-3">
-                <a href="#" class="btn btn-success" onclick="abrirFormulario()">
-                  <i class="fa fa-plus"></i> Ingresa tus PQRS
+                <a href="index.php?ruta=PQRS/Ingresopqrs.crear" class="btn btn-success">
+                  <i class="fa fa-plus"></i> Ingresa tu PQRSF
                 </a>
               </div>
               <div class="row">
-                <div class="col-md-12">
-                  <!-- advanced Tables -->
-                  <div class="panel panel-default">
-                    <div class="panel-body">
-                      <div class="table-responsive">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <div class="table-responsive">
                         <table id="datatables" class="table table-sm table-striped table-bordered table-hover datatable">
                           <thead class="table-header">
                             <tr>
-                              <th width="15%">Número de Registro</th>
-                              <th width="0%">Fecha de radicación</th>
-                              <th width="20%">Tipo</th>
-                              <th width="50%">Detalle</th>
-                              <th width="50%">Estado</th>
-                              <th width="50%">Consultar</th>
+                              <th width="10%"># ID del Registro</th>
+                              <th width="10%">Fecha de radicación</th>
+                              <th width="15%">Tipo</th>
+                              <th width="15%">Detalle</th>
+                              <th width="60%">Estado</th>
+                              <th width="5%">Acciones</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -78,18 +78,17 @@ require_once "./controladores/PQRS/Pqrs.controller.php";
                             $pqrs = PqrsController::index();
                             foreach ($pqrs as $key => $pqr) {
                               echo '<tr>
-                                    <td>' . $pqr["id_pqrs"] . '</td>
-                                    <td>' . $pqr["fecha_radicacion_pqrs"] . '</td>
-                                    <td>' . $pqr["tipo_pqrs"] . '</td>
-                                    <td>' . $pqr["detalle"] . '</td>
-                                    <td>' . $pqr["estado_pqrs"] . '</td>';
-
-                              echo '<td>
-                                    <a href="#" class="btn btn-warning btn-sm">
-                                    <i class="fa fa-download nav-icon"></i> <span>Descargas</span>
+                                    <td>' . htmlspecialchars ($pqr["id_pqrs"]) . '</td>
+                                    <td>' . htmlspecialchars ($pqr["fecha_radicacion_pqrs"]) . '</td>
+                                    <td>' . htmlspecialchars ($pqr["tipo_pqrs"]) . '</td>
+                                    <td>' . htmlspecialchars ($pqr["estado_pqrs"]) . '</td>
+                                    <td>' . htmlspecialchars ($pqr["detalle"]) . '</td>
+                                    <td>
+                                    <a href="index.php?ruta=PQRS/Ingresopqrs.crear&id_pqrs=' . htmlspecialchars($pqr["id_pqrs"]) . '" class="btn btn-warning btn-sm">
+                                      <i class="fa fa-edit"></i> Editar
                                     </a>
-                                </td>
-                            </tr>';
+                                  </td>                                  
+                               </tr>';
                             }
                             ?>
                           </tbody>
@@ -124,7 +123,8 @@ require_once "./controladores/PQRS/Pqrs.controller.php";
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
-
+ <!-- Agrega Bootstrap JS si es necesario -->
+ <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <!-- Incluye script -->
   <script src="plantilla.js"></script>
 
@@ -145,6 +145,10 @@ require_once "./controladores/PQRS/Pqrs.controller.php";
       const PqrsIframe = document.getElementById('Pqrs-iframe');
       PqrsIframe.src = rutaPqrs;
       PqrsConsulta.style.display = 'block';
+    }
+
+    function abrirFormulario() {
+      window.location.href = 'index.php?ruta=PQRS/Ingresopqrs.crear';
     }
   </script>
 </body>

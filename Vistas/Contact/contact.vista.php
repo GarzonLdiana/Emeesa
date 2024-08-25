@@ -1,59 +1,39 @@
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-    <!-- Main content -->
-    <main class="content">
-        <section class="content-header">
-            <!-- ... (sin cambios) ... -->
-        </section>
-
-        <!-- Formulario de Contacto -->
-        <article class="card">
-            <header class="card-header">
-                <!-- ... (sin cambios) ... -->
-            </header>
-
-            <section class="card-body">
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label for="nombre">Nombres - Apellidos:</label>
-                        <textarea class="form-control" id="nombres" name="nombres" rows="1" required></textarea>
-
-                        <label for="email">Correo Electrónico:</label>
-                        <textarea class="form-control" id="email" name="email" rows="1" required></textarea>
-
-                        <label for="phone">Celular:</label>
-                        <textarea class="form-control" id="celular" name="celular" rows="1" required></textarea>
-                        <p></p>
-                        <label for="asunto">Asunto:</label>
-                        <textarea class="form-control" id="asunto" name="asunto" rows="1" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="mensaje">Mensaje:</label>
-                        <textarea class="form-control" id="mensaje" name="mensaje" rows="4" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Enviar</button>
-                </form>
-                <div id="mensaje-enviado-exito" style="display: none;">
-                    <h3>¡Enviado exitosamente!</h3>
-                    <!-- Aquí podrías mostrar más información o redirigir al usuario -->
-                </div>
-            </section>
-            <!-- /.card-body -->
-
-            <!-- /.card-footer-->
-        </article>
-        <!-- /.card -->
-    </main>
-    <!-- /.content -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto</title>
+    <link rel="stylesheet" href="assets/css/styles.css"> <!-- Ruta correcta para el CSS -->
+    <script src="assets/temas/adminlte/dist/js/script.js" defer></script> <!-- Ruta correcta para el JS -->
+</head>
+<body>
+    <h1>Formulario de Contacto</h1>
+    
+    <form id="contactForm" method="POST" action="procesar_contacto.php">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+        
+        <label for="correo">Correo Electrónico:</label>
+        <input type="email" id="correo" name="correo" placeholder="Tu correo" required>
+        
+        <label for="mensaje">Mensaje:</label>
+        <textarea id="mensaje" name="mensaje" placeholder="Tu mensaje" required></textarea>
+        
+        <input type="submit" value="Enviar">
+    </form>
 
     <script>
-        document.getElementById('pqrsForm').addEventListener('submit', function (event) {
-            event.preventDefault(); // Evitar el envío del formulario por defecto
-            // Aquí puedes agregar la lógica para enviar los datos a un servidor o procesarlos
-
-            // Mostrar mensaje de éxito o redirigir al usuario
-            const pqrExito = document.getElementById('mensaje-enviado-exito');
-            pqrExito.style.display = 'block';
+        // Si necesitas agregar algún código JavaScript adicional aquí
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contactForm');
+            if (form) {
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault(); // Evita el envío del formulario por defecto
+                    alert('Formulario enviado con éxito'); // Aquí puedes agregar lógica para enviar datos
+                });
+            }
         });
     </script>
-</div> <!-- /.content-wrapper -->
+</body>
+</html>

@@ -1,108 +1,117 @@
 <?php
 
-/* =============================================================================================================
-* Desarrollado Por        : GAES 14
-* Fecha de Creación       : 16 Julio 2024
-* Lenguaje Programación   : PHP
-* Producto o sistema      : IEMESSA
-* Tipo                    : Modelo
-* ====================================================================================================================
-* Versión Descripción
-* [1.0.0.0] Modelo de la tabla facturas.
-* ====================================================================================================================
-* MODIFICACIONES:
-* ====================================================================================================================
-* Ver.      Fecha            Autor – Empresa                       Descripción
-* --------- ------------- -----------------------------------   -------------------------------------------------------
-* 1.0       16/07/2024    GAES 14 -  Emeesa                     Versión inicial del modelo
-* ====================================================================================================================
-*/
-
 require_once "./modelos/connection.php";
 
 class RolesModel {
 
-  public static function index() {
-    try {
-      /** Realizar la consulta a la base de datos */
-      $conexion = Connection::connect();
-      $stmt = $conexion->prepare("SELECT rol.id_roles, rol.nombre_de_usuario, rol.descripcion_del_rol, rol.estado, rol.acciones 
-                                  FROM Roles AS rol
-                                  ORDER BY rol.id_roles DESC");
-
-      /** Ejecutar la consulta */
-      $stmt->execute(); 
-
-      /** Devuelve los datos consultados */
-      $result = $stmt->fetchAll();
-
-      /** Cerrar el cursor */
-      $stmt->closeCursor();
-
-      return $result;
-
-    } catch (Exception $e) {
-      echo $e->getMessage();
-      die();
-    } finally {
-      /** Liberar la conexión */
-      $conexion = null;
-    }
-  }
-
-  // Método para guardar registro en la tabla de la base de datos
-  public static function create($data) {
-    try {
-      $conexion = Connection::connect();
-
-      // Validar que no exista un registro con el mismo código
-      $stmt = $conexion->prepare("SELECT * FROM Roles WHERE CODIGO = :code");
-      $stmt->bindParam(":code", $data["addInputCode"], PDO::PARAM_STR);
-      $stmt->execute();
-
-      if ($stmt->rowCount() > 0) {
-        // Ya existe un registro con ese código
-        echo '<script>
-                Swal.fire({
-                  icon: "error",
-                  title: "La consulta ya fue generada.",
-                  showConfirmButton: true,
-                  confirmButtonText: "Aceptar"
-                }).then(function(result){
-                  if (result.value) {
-                    window.location.href = "index.php?ruta=Roles/ListarRoles/roles.crear";
-                  }
-                });
-              </script>';
-      } else {
-        // Crear la nueva consulta
-        $createStmt = $conexion->prepare("INSERT INTO Rol (codigo, descripcion, activo, user_create)
-                                          VALUES (:addInputCode, :addInputDescription, :addInputActive, :userId)");
-        $createStmt->bindParam(":addInputCode", $data["addInputCode"], PDO::PARAM_STR);
-        $createStmt->bindParam(":addInputDescription", $data["addInputDescription"], PDO::PARAM_STR);
-        $createStmt->bindParam(":addInputActive", $data["addInputActive"], PDO::PARAM_INT);
-        $createStmt->bindParam(":userId", $data["userId"], PDO::PARAM_INT);
-
-        if ($createStmt->execute()) {
-          return "Ok";
-        } else {
-          return "Error Modelo";
+    // Método para recuperar todos los registros de roles
+    public static function index() {
+        try {
+            $conexion = Connection::connect();
+            $stmt = $conexion->prepare("
+                SELECT roles.id_roles, 
+                       usuario.nombre AS usuario_nombre, 
+                       usuario.estado_usuario AS usuario_estado_usuario, 
+                       roles.rol, 
+                       roles.estado_rol, 
+                       usuario.id_usuario AS id_usuario
+                FROM roles_has_usuario
+                INNER JOIN usuario ON usuario.id_usuario = roles_has_usuario.usuario_id_usuario 
+                INNER JOIN roles ON roles.id_roles = roles_has_usuario.roles_id_roles
+                ORDER BY usuario.id_usuario DESC
+            ");
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            error_log("Error en RolesModel::index(): " . $e->getMessage());
+            return [];
+        } finally {
+            $conexion = null;
         }
-      }
-
-    } catch (Exception $e) {
-      echo $e->getMessage();
-      die();
-    } finally {
-      if (isset($stmt)) {
-        $stmt->closeCursor();
-      }
-      if (isset($createStmt)) {
-        $createStmt->closeCursor();
-      }
-      $conexion = null;
     }
-  }
+
+    // Método para recuperar un registro de rol por su ID y ID de usuario
+    public static function getById($id_roles, $id_usuario) {
+        try {
+            $conexion = Connection::connect();
+            $stmt = $conexion->prepare("
+                SELECT roles.id_roles, 
+                       usuario.nombre AS usuario_nombre, 
+                       usuario.estado_usuario AS usuario_estado_usuario, 
+                       roles.rol, 
+                       roles.estado_rol
+                FROM roles_has_usuario
+                INNER JOIN usuario ON usuario.id_usuario = roles_has_usuario.usuario_id_usuario 
+                INNER JOIN roles ON roles.id_roles = roles_has_usuario.roles_id_roles
+                WHERE roles.id_roles = :id_roles AND usuario.id_usuario = :id_usuario
+            ");
+            $stmt->bindParam(":id_roles", $id_roles, PDO::PARAM_INT);
+            $stmt->bindParam(":id_usuario", $id_usuario, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            error_log("Error en RolesModel::getById(): " . $e->getMessage());
+            return null;
+        } finally {
+            $conexion = null;
+        }
+    }
+
+    // Método para crear o actualizar un rol
+    public static function saveRole($data) {
+        try {
+            $conexion = Connection::connect();
+            
+            // Verificar si es una actualización o una creación
+            if (isset($data['id_roles'])) {
+                // Actualizar el rol
+                $stmt = $conexion->prepare("
+                    UPDATE roles 
+                    SET rol = :rol, 
+                        estado_rol = :estado_rol
+                    WHERE id_roles = :id_roles
+                ");
+                $stmt->bindParam(":id_roles", $data['id_roles'], PDO::PARAM_INT);
+            } else {
+                // Crear un nuevo rol
+                $stmt = $conexion->prepare("
+                    INSERT INTO roles (rol, estado_rol) 
+                    VALUES (:rol, :estado_rol)
+                ");
+            }
+            
+            $stmt->bindParam(":rol", $data['rol'], PDO::PARAM_STR);
+            $stmt->bindParam(":estado_rol", $data['estado_rol'], PDO::PARAM_STR);
+            
+            if ($stmt->execute()) {
+                $id_roles = isset($data['id_roles']) ? $data['id_roles'] : $conexion->lastInsertId();
+                
+                // Actualizar la relación en roles_has_usuario
+                $stmtUsuario = $conexion->prepare("
+                    REPLACE INTO roles_has_usuario (roles_id_roles, usuario_id_usuario) 
+                    VALUES (:id_roles, :id_usuario)
+                ");
+                $stmtUsuario->bindParam(":id_roles", $id_roles, PDO::PARAM_INT);
+                $stmtUsuario->bindParam(":id_usuario", $data['id_usuario'], PDO::PARAM_INT);
+                
+                if ($stmtUsuario->execute()) {
+                    return "Ok";
+                } else {
+                    error_log("Error en RolesModel::saveRole(): " . implode(", ", $stmtUsuario->errorInfo()));
+                    return "Error al actualizar la relación con el usuario";
+                }
+            } else {
+                error_log("Error en RolesModel::saveRole(): " . implode(", ", $stmt->errorInfo()));
+                return "Error al guardar el rol";
+            }
+        } catch (Exception $e) {
+            error_log("Error en RolesModel::saveRole(): " . $e->getMessage());
+            return "Error en la operación";
+        } finally {
+            if (isset($stmt)) {
+                $stmt->closeCursor();
+            }
+            $conexion = null;
+        }
+    }
 }
-
-
